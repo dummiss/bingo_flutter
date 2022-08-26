@@ -1,0 +1,36 @@
+name: bingo_flutter
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.17.6 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  ##logo動畫
+  animated_text_kit: ^4.2.2
+  ##字體
+  google_fonts: ^3.0.1
+  ##Firebase Database
+  cloud_firestore: ^3.4.4
+  ##Annotations
+  json_annotation: ^4.6.0
+
+  flutter: 
+    sdk: flutter
+  firebase_core: ^1.21.0
+
+dev_dependencies:
+
+  #Auto Generate
+  build_runner: ^2.1.11
+  json_serializable: ^6.3.1
+
+  flutter_lints: 2.0.1
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+

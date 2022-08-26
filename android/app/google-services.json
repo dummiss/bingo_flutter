@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "634437678748",
+    "project_id": "bingo-flutter-7494e",
+    "storage_bucket": "bingo-flutter-7494e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634437678748:android:a953bf4876f4f9ad805f59",
+        "android_client_info": {
+          "package_name": "com.bsyuan.bingo_flutter.bingo_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634437678748-tsm5jvf3t571t3lbknpnhel2rpahiiil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv98vFYoAcATqB2I3GC3Ed5FL-gLGUSCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634437678748-tsm5jvf3t571t3lbknpnhel2rpahiiil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634437678748:android:c21fc2fe1a03f330805f59",
+        "android_client_info": {
+          "package_name": "com.syuancode.bingo_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634437678748-tsm5jvf3t571t3lbknpnhel2rpahiiil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv98vFYoAcATqB2I3GC3Ed5FL-gLGUSCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634437678748-tsm5jvf3t571t3lbknpnhel2rpahiiil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
