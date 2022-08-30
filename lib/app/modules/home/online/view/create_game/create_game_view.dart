@@ -1,14 +1,14 @@
-import 'package:bingo_flutter/app/widget/button.dart';
-import 'package:bingo_flutter/app/widget/input_grids.dart';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../widget/input_grids_num_view.dart';
-import 'two_player_controller.dart';
+import 'create_game_controller.dart';
 
-class TwoPlayerView extends GetView<TwoPlayerController> {
-  const TwoPlayerView({Key? key}) : super(key: key);
+
+
+
+class CreateGameView extends GetView<CreateGameController> {
+  const CreateGameView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return

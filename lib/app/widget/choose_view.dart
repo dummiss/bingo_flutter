@@ -19,7 +19,6 @@ class ChooseView extends StatefulWidget {
 }
 
 class _ChooseViewState extends State<ChooseView> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +43,17 @@ class _ChooseViewState extends State<ChooseView> {
                   width: 150,
                   height: 45,
                   btnText: '自選號碼',
-                  fn: () => Get.to( StartView(controller: widget.controller, btnBgColor: widget.btnBgColor, routeName: ChoiceByOwnView(
-                      btnBgColor: widget.btnBgColor, controller: widget.controller),)),
+                  fn: () {
+                    Get.to(() => StartView(
+                          controller: widget.controller,
+                          btnBgColor: widget.btnBgColor,
+                          routeName: ChoiceByOwnView(
+                              btnBgColor: widget.btnBgColor,
+                              controller: widget.controller, gridsNumberShow: widget.controller.gridsNumberShow,),
+                        ));
+                    widget.controller.createGame('自選號碼');
+                    print('${widget.controller.gridsNumberShow}');
+                  },
                   bgColor: Colors.orangeAccent),
               const SizedBox(
                 height: 20,
@@ -55,8 +63,16 @@ class _ChooseViewState extends State<ChooseView> {
                   width: 150,
                   height: 45,
                   btnText: '電腦叫號',
-                  fn: () => Get.to(StartView(controller: widget.controller, btnBgColor: widget.btnBgColor, routeName: ChoiceByPc(
-                      btnBgColor: widget.btnBgColor, controller: widget.controller),)),
+                  fn: () {
+                    Get.to(() => StartView(
+                          controller: widget.controller,
+                          btnBgColor: widget.btnBgColor,
+                          routeName: ChoiceByPc(
+                              btnBgColor: widget.btnBgColor,
+                              controller: widget.controller),
+                        ));
+                    widget.controller.createGame('電腦叫號');
+                  },
                   bgColor: Colors.orangeAccent),
             ],
           ),

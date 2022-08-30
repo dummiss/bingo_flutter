@@ -1,26 +1,27 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../routes/app_pages.dart';
 import 'button.dart';
 import 'input_grids.dart';
 
-class ChoiceByPc extends StatefulWidget {
+class ResultView extends StatefulWidget {
   final controller;
   final Color btnBgColor;
+  final String result;
 
-  const ChoiceByPc({
-    Key? key,
-    required this.controller,
-    required this.btnBgColor,
-  }) : super(key: key);
+  const ResultView(
+      {Key? key,
+      required this.controller,
+      required this.btnBgColor,
+      this.result = ''})
+      : super(key: key);
 
   @override
-  State<ChoiceByPc> createState() => _ChoiceByPcState();
+  State<ResultView> createState() => _ResultViewState();
 }
 
-class _ChoiceByPcState extends State<ChoiceByPc> {
+class _ResultViewState extends State<ResultView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +29,7 @@ class _ChoiceByPcState extends State<ChoiceByPc> {
           title: const Text('單機對戰中'),
         ),
         body: Center(
-          child: SizedBox(
-            height: 700,
+          child: SingleChildScrollView( //防止邊界溢出
             child: Column(
               children: [
                 const Text(
@@ -40,7 +40,7 @@ class _ChoiceByPcState extends State<ChoiceByPc> {
                     gameStart: true,
                     newGame: widget.controller.girdsState,
                     gridsNumber: widget.controller.pcGridsNumberShow,
-                    history: widget.controller.history),
+                history: widget.controller.history,),
                 const SizedBox(
                   height: 20,
                 ),
@@ -50,35 +50,29 @@ class _ChoiceByPcState extends State<ChoiceByPc> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Obx(() => Text(
-                              widget.controller.selectNum.toString(),
-                              style: const TextStyle(
-                                  fontSize: 40, color: Colors.white),
-                              textAlign: TextAlign.center,
-                            )),
+                        child: Text(
+                          widget.result,
+                          style: const TextStyle(
+                              fontSize: 40, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
                       )
                     ],
                   ),
                 ),
+
                 const SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Button(
-                    width: 100,
+                    width: 140,
                     height: 45,
-                    btnText: 'next',
-                    fn: () {
-
-                      widget.controller.gameStartNextBtnFn(
-                          widget.controller.selectNumByRandom().toString(),
-                          widget.controller,
-                          widget.btnBgColor);
-                      setState(() {});
-                    },
+                    btnText: '回主畫面',
+                    fn: ()=>Get.toNamed(Routes.HOME),
                     bgColor: widget.btnBgColor,
                     textSize: 20),
                 const SizedBox(
-                  height: 30,
+                  height: 15,
                 ),
                 const Text(
                   '玩家',

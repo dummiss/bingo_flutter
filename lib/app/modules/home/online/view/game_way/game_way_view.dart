@@ -1,18 +1,12 @@
-import 'package:bingo_flutter/app/widget/button.dart';
-import 'package:bingo_flutter/app/widget/input_grids.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'game_way_controller.dart';
 
-import '../../../../widget/input_grids_num_view.dart';
-import 'two_player_controller.dart';
-
-class TwoPlayerView extends GetView<TwoPlayerController> {
-  const TwoPlayerView({Key? key}) : super(key: key);
+class GameWayView extends GetView<GameWayController> {
+  const GameWayView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('OnlineView'),
         centerTitle: true,

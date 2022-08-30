@@ -6,8 +6,8 @@ part of 'game_data_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-game_data_model _$game_data_modelFromJson(Map<String, dynamic> json) =>
-    game_data_model(
+GameDataModel _$GameDataModelFromJson(Map<String, dynamic> json) =>
+    GameDataModel(
       data: (json['data'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as int).toList()),
@@ -28,7 +28,7 @@ game_data_model _$game_data_modelFromJson(Map<String, dynamic> json) =>
       winner: json['winner'] as String? ?? '',
     );
 
-Map<String, dynamic> _$game_data_modelToJson(game_data_model instance) =>
+Map<String, dynamic> _$GameDataModelToJson(GameDataModel instance) =>
     <String, dynamic>{
       'data': instance.data,
       'history': instance.history,

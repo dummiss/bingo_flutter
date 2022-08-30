@@ -44,7 +44,7 @@ class _InputGridsNumViewState extends State<InputGridsNumView> {
         InputGrids(
             controller: widget.controller,
             newGame: widget.controller.girdsState,
-            gridsNumber: widget.controller.gridsNumber),
+            gridsNumber: widget.controller.gridsNumberShow),
         const SizedBox(
           height: 40,
         ),

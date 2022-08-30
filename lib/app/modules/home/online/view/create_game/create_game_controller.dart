@@ -1,15 +1,7 @@
 import 'package:get/get.dart';
 
-class OnlineController extends GetxController {
-  RxBool girdsState = true.obs;
-  RxList gridsNumberShow = [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-  ].obs;
-
+class CreateGameController extends GetxController {
+  //TODO: Implement CreateGameController
 
   final count = 0.obs;
   @override

@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../routes/app_pages.dart';
 import '../../widget/button.dart';
-import '../../widget/choose_view.dart';
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -73,7 +72,7 @@ class HomeView extends GetView<HomeController> {
                     btnText: '2 player',
                     bgColor: Colors.green.shade200,
                     fn: () {
-                      Get.to(ChooseView(btnBgColor: Colors.red.shade200,controller:controller,));
+                      Get.toNamed(Routes.TWO_PLAYER);
                     }),
                 const SizedBox(
                   height: 20,
@@ -85,7 +84,7 @@ class HomeView extends GetView<HomeController> {
                     btnText: 'online PK',
                     bgColor: Colors.grey,
                     fn: () {
-                      debugPrint('online Pk');
+                      Get.toNamed(Routes.ONLINE);
                     }),
                 // InputGrids(newGame: false)
               ],

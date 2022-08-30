@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-
-import '../local_controller.dart';
 import 'one_player_controller.dart';
 
 class OnePlayerBinding extends Bindings {
@@ -9,6 +7,5 @@ class OnePlayerBinding extends Bindings {
     Get.lazyPut<OnePlayerController>(
       () => OnePlayerController(),
     );
-   Get.put(LocalController());
   }
 }

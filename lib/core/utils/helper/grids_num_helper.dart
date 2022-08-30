@@ -24,7 +24,7 @@ class GridsNumHelper {
   }
 
   //轉成二維陣列
-  List<List<int>> toTwoDimensionalArrays(List<int> numbers) {
+  List<List<int>> toTwoDimensionalArrays(List numbers) {
     List<List<int>> result = [];
     List<int> tmp = [];
     for (int i = 0; i < 25; i++) {
@@ -48,6 +48,7 @@ class GridsNumHelper {
     int numSizeCheck = 0;
     int repeatCheck = 0;
     List<int> check = [];
+
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
         if (gridsNumber[i][j] == 0) {
@@ -77,7 +78,7 @@ class GridsNumHelper {
         btnText: 'OK',
       ));
     } else {
-      Get.to(() => ChooseView(btnBgColor: btnBgColor,controller:controller));
+      Get.to(() => ChooseView(btnBgColor: btnBgColor, controller: controller));
     }
   }
 }

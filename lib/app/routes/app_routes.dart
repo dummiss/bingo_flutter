@@ -7,7 +7,6 @@ abstract class Routes {
   static const ONE_PLAYER = _Paths.ONE_PLAYER;
   static const TWO_PLAYER = _Paths.TWO_PLAYER;
   static const ONLINE = _Paths.ONLINE;
-  static const LOCAL = _Paths.LOCAL;
 }
 
 abstract class _Paths {
@@ -16,5 +15,4 @@ abstract class _Paths {
   static const ONE_PLAYER = '/one-player';
   static const TWO_PLAYER = '/two-player';
   static const ONLINE = '/online';
-  static const LOCAL = '/local';
 }

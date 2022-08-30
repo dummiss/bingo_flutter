@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'join_game_controller.dart';
 
-import 'local_controller.dart';
-
-class LocalView extends GetView<LocalController> {
-  const LocalView({Key? key}) : super(key: key);
+class JoinGameView extends GetView<JoinGameController> {
+  const JoinGameView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LocalView'),
+        title: const Text('OnlineView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
-          'LocalView is working',
+          'OnlineView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

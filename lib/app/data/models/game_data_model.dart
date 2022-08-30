@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'game_data_model.g.dart';
 
 @JsonSerializable()
-class game_data_model {
+class GameDataModel {
   Map<String, List<int>>? data;
   @JsonKey(defaultValue: [])
   List<int> history;
@@ -18,7 +18,7 @@ class game_data_model {
   @JsonKey(defaultValue: '')
   String winner;
 
-  game_data_model(
+  GameDataModel(
       {this.data,
       required this.history,
       required this.howToPlay,
@@ -27,8 +27,8 @@ class game_data_model {
       required this.sequence,
       required this.winner});
 
-  factory game_data_model.fromJson(Map<String, dynamic> json) =>
-      _$game_data_modelFromJson(json);
+  factory GameDataModel.fromJson(Map<String, dynamic> json) =>
+      _$GameDataModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$game_data_modelToJson(this);
+  Map<String, dynamic> toJson() => _$GameDataModelToJson(this);
 }

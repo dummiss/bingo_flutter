@@ -7,13 +7,15 @@ class InputGrids extends StatefulWidget {
   final RxList gridsNumber;
   final controller;
   final bool gameStart;
+  final List history;
 
   const InputGrids(
       {Key? key,
       this.gameStart = false,
       required this.newGame,
       required this.gridsNumber,
-      this.controller})
+      this.controller,
+      this.history = const []})
       : super(key: key);
 
   @override
@@ -22,15 +24,7 @@ class InputGrids extends StatefulWidget {
 
 class _InputGridsState extends State<InputGrids> {
   List test = [];
-  var randomColor = Random().nextInt(Colors.primaries.length); //隨機背景顏色用
-  // FocusNode focusNode=FocusNode();//鍵盤焦點
-  //
-  // @override
-  // void dispose() {
-  //   focusNode.dispose();
-  //   super.dispose();
-  // }
-  //Todo:30把numberGrid存回firebase
+  var randomColor = Random().nextInt(Colors.accents.length); //隨機背景顏色用
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +44,19 @@ class _InputGridsState extends State<InputGrids> {
             int whichRow = index ~/ 5.floor();
             int numberIndex = index % 5;
 
+            //選中的顏色
+            Color? bgColor = Colors.blue[400];
+            for (int j = 0; j < widget.history.length; j++) { //用歷史紀錄去跑
+              if (widget.gridsNumber[whichRow][numberIndex] ==
+                  widget.history[j]) {
+                bgColor = Colors.red;
+              }
+            }
+
             return GridTile(child: Obx(() {
               return Container(
                 decoration: BoxDecoration(
-                    color: Colors.primaries[randomColor],
+                    color: bgColor,
                     border: Border.all(
                         width: 1,
                         style: BorderStyle.solid,
@@ -62,7 +65,6 @@ class _InputGridsState extends State<InputGrids> {
                     child: TextField(
                   readOnly: widget.gameStart,
                   controller:
-                      //Todo: 把下面63改成從firebase撈回的資料
                       widget.newGame.value //判斷是否是新遊戲，true：顯示輸入框, false:顯示數字
                           ? null
                           : (TextEditingController()
@@ -70,8 +72,11 @@ class _InputGridsState extends State<InputGrids> {
                                 .toString()),
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
                   onChanged: (value) {
                     widget.controller.test(value, whichRow, numberIndex);
+                    print( widget.controller.gridsNumberShow);
+
                   },
                 )),
               );

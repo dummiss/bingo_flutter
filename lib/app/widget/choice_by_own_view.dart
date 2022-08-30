@@ -7,18 +7,23 @@ import 'package:get/get.dart';
 import 'choice_by_pc.dart';
 
 class ChoiceByOwnView extends StatefulWidget {
+  final RxList gridsNumberShow;
   final Color btnBgColor;
   final controller;
   const ChoiceByOwnView(
-      {Key? key, required this.btnBgColor, required this.controller})
+      {Key? key,
+      required this.btnBgColor,
+      required this.controller,
+      required this.gridsNumberShow})
       : super(key: key);
-
 
   @override
   State<ChoiceByOwnView> createState() => _ChoiceByOwnViewState();
 }
 
 class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
+  TextEditingController numberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,7 +33,7 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
           title: const Text('單機對戰中'),
         ),
         body: Center(
-          child: Container(
+          child: SizedBox(
             height: 500,
             child: Column(
               children: [
@@ -36,9 +41,10 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
                   '請輸入號碼',
                   style: (TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                 ),
-                const TextField(
-                  style: TextStyle(fontSize: 30),
-                  decoration: InputDecoration(
+                TextField(
+                  controller: numberController,
+                  style: const TextStyle(fontSize: 30),
+                  decoration: const InputDecoration(
                       contentPadding: EdgeInsets.all(10.0),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black))),
@@ -53,7 +59,11 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
                     height: 45,
                     btnText: 'next',
                     fn: () {
-                      Get.to(ChoiceByPc(controller:widget.controller,btnBgColor:widget.btnBgColor));
+                      widget.controller.gameStartNextBtnFn(
+                          numberController.text, widget.controller,widget.btnBgColor);
+                      numberController.clear();
+                      //TODO:這裡不知道如何讓他自己可重畫，只好下setState
+                      setState(() {});
                     },
                     bgColor: widget.btnBgColor,
                     textSize: 20),
@@ -63,7 +73,8 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
                 InputGrids(
                     gameStart: true,
                     newGame: widget.controller.girdsState,
-                    gridsNumber: widget.controller.gridsNumber),
+                    gridsNumber: widget.gridsNumberShow,
+                    history: widget.controller.history),
               ],
             ),
           ),
