@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 
-import '../modules/home/home_binding.dart';
-import '../modules/home/home_view.dart';
-import '../modules/home/local/one_player/one_player_binding.dart';
-import '../modules/home/local/one_player/one_player_view.dart';
-import '../modules/home/local/two_player/two_player_binding.dart';
-import '../modules/home/local/two_player/two_player_view.dart';
-import '../modules/home/online/online_binding.dart';
-import '../modules/home/online/online_view.dart';
+import '../app/modules/home/home_binding.dart';
+import '../app/modules/home/home_view.dart';
+import '../app/modules/home/local/one_player/one_player_binding.dart';
+import '../app/modules/home/local/one_player/one_player_view.dart';
+import '../app/modules/home/local/two_player/two_player_binding.dart';
+import '../app/modules/home/local/two_player/two_player_view.dart';
+import '../app/modules/home/online/online_binding.dart';
+import '../app/modules/home/online/online_view.dart';
 
 part 'app_routes.dart';
 

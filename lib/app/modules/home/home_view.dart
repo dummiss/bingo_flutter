@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 import '../../widget/button.dart';
 import 'home_controller.dart';
 

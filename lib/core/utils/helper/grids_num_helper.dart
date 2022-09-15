@@ -1,10 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../app/widget/button.dart';
-import '../../../app/widget/choose_view.dart';
 import '../../../app/widget/showAlertDialog.dart';
 
 class GridsNumHelper {
@@ -42,8 +38,7 @@ class GridsNumHelper {
 
   //檢查grids裡的數字是否符合規則
   //TODO: Ask: 如果我的判斷裡包含有回傳widget和無回傳widget，我要如何定義型態？ ex:在下面的checkGridsNum前
-  checkGridsNum(
-      {required gridsNumber, required btnBgColor, required controller}) {
+  checkGridsNum({required gridsNumber, required btnBgColor}) {
     int nullCheck = 0;
     int numSizeCheck = 0;
     int repeatCheck = 0;
@@ -78,7 +73,7 @@ class GridsNumHelper {
         btnText: 'OK',
       ));
     } else {
-      Get.to(() => ChooseView(btnBgColor: btnBgColor, controller: controller));
+      return true;
     }
   }
 }

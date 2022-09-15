@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class InputGrids extends StatefulWidget {
   final RxBool newGame;
   final RxList gridsNumber;
-  final controller;
+  final Function inputNum;
   final bool gameStart;
   final List history;
 
@@ -14,8 +14,8 @@ class InputGrids extends StatefulWidget {
       this.gameStart = false,
       required this.newGame,
       required this.gridsNumber,
-      this.controller,
-      this.history = const []})
+      this.history = const [],
+      required this.inputNum})
       : super(key: key);
 
   @override
@@ -46,7 +46,8 @@ class _InputGridsState extends State<InputGrids> {
 
             //選中的顏色
             Color? bgColor = Colors.blue[400];
-            for (int j = 0; j < widget.history.length; j++) { //用歷史紀錄去跑
+            for (int j = 0; j < widget.history.length; j++) {
+              //用歷史紀錄去跑
               if (widget.gridsNumber[whichRow][numberIndex] ==
                   widget.history[j]) {
                 bgColor = Colors.red;
@@ -74,9 +75,8 @@ class _InputGridsState extends State<InputGrids> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white),
                   onChanged: (value) {
-                    widget.controller.test(value, whichRow, numberIndex);
-                    print( widget.controller.gridsNumberShow);
-
+                    widget.inputNum(value, whichRow, numberIndex);
+                    print(widget.gridsNumber);
                   },
                 )),
               );

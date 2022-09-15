@@ -1,10 +1,6 @@
-import 'package:bingo_flutter/app/widget/button.dart';
-import 'package:bingo_flutter/app/widget/input_grids.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
-import '../../../../widget/input_grids_num_view.dart';
 import 'two_player_controller.dart';
 
 class TwoPlayerView extends GetView<TwoPlayerController> {
@@ -19,7 +15,7 @@ class TwoPlayerView extends GetView<TwoPlayerController> {
       ),
       body: const Center(
         child: Text(
-          'OnlineView is working',
+          'TwoPlayerView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

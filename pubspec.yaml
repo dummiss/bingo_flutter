@@ -16,6 +16,9 @@ dependencies:
   cloud_firestore: ^3.4.4
   ##Annotations
   json_annotation: ^4.6.0
+  ##qrCode:build&scanner
+  qr_flutter: ^4.0.0
+  qr_code_scanner: ^1.0.1
 
   flutter: 
     sdk: flutter

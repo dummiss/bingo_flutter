@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../core/utils/helper/grids_num_helper.dart';
 import '../../../../../core/utils/helper/line_check_helper.dart';
 import '../../../../data/providers/providers/firebase_provider.dart';
+import '../../../../widget/showAlertDialog.dart';
 
 class OnePlayerController extends GetxController {
   final gridsNumHelper = Get.find<GridsNumHelper>();
@@ -16,8 +17,8 @@ class OnePlayerController extends GetxController {
   RxBool girdsState = true.obs; //隨機按鈕切換狀態
   RxString errorMS = ''.obs;
 
-  final List history = [];
-  final String howToPlay = '';
+  final RxList history = [].obs;
+  final String howToPlay = ''; //用enum
   final List player = ['you', 'pc'];
   final List sequence = [];
   final String winner = '';
@@ -37,7 +38,7 @@ class OnePlayerController extends GetxController {
     [0, 0, 0, 0, 0],
   ].obs;
 
-  test(value, whichRow, numberIndex) {
+  void inputNum(value, whichRow, numberIndex) {
     if (value.toString() == '') {
       gridsNumberShow[whichRow][numberIndex] = 0;
       errorMS.value = '';
@@ -45,6 +46,7 @@ class OnePlayerController extends GetxController {
       gridsNumberShow[whichRow][numberIndex] = int.parse(value);
       you.add(value);
     }
+    //TODO: 這裡用tryParse，錯誤會回傳ｎｕｌｌ
     if (int.parse(value) > 25 || int.parse(value) < 0) {
       errorMS.value = '注意：有格子數字 >26 或 <1';
     }
@@ -52,17 +54,16 @@ class OnePlayerController extends GetxController {
 
   void randomBtnFn() {
     girdsState.value = false;
+    errorMS.value = '';
     you = gridsNumHelper.getRandomNumber();
     gridsNumberShow.value = gridsNumHelper.toTwoDimensionalArrays(you);
   }
 
-  nextBtnFn({required btnBgColor, required controller}) {
-    //25個數字輸入的檢查
-    gridsNumHelper.checkGridsNum(
-        gridsNumber: gridsNumberShow,
-        btnBgColor: btnBgColor,
-        controller: controller);
-    girdsState.value = false;
+  //25個數字輸入的檢查
+  nextBtnFn({required btnBgColor}) {
+    var res = gridsNumHelper.checkGridsNum(
+        gridsNumber: gridsNumberShow, btnBgColor: btnBgColor);
+    return res;
   }
 
   //建立遊戲，上傳到firebase
@@ -88,56 +89,53 @@ class OnePlayerController extends GetxController {
     return selectNum;
   }
 
-  gameStartNextBtnFn(String number, controller, Color btnBgColor) {
-    String winner = '';
-    selectNum.value = int.parse(number);
-    history.add(selectNum.value);
-    debugPrint('history:$history');
+  gameStartNextBtnFn(String number, Color btnBgColor) {
+    if (number == '') {
+      Get.dialog(const ShowAlertDialog(
+          listBody: [Text('注意！\n沒有輸入號碼')], btnText: 'OK'));
+    } else {
+      String winner = '';
+      selectNum.value = int.parse(number);
+      history.add(selectNum.value);
+      debugPrint('history:$history');
 
-    //檢查連線數
-    for (int i = 0; i < 25; i++) {
-      if (pc[i] == selectNum.value) {
-        pc[i] = 0;
-        winner = lineCheckHelper.check(
-          numList: pcGridsNumberShow,
-          name: '電腦',
-          controller: controller,
-          btnBgColor: btnBgColor,
-        );
+      //檢查連線數
+      for (int i = 0; i < 25; i++) {
+        if (pc[i] == selectNum.value) {
+          pc[i] = 0;
+          winner = lineCheckHelper.check(
+              numList: pcGridsNumberShow,
+              name: '電腦',
+              btnBgColor: btnBgColor,
+              girdsState: girdsState,
+              history: history,
+              inputNum: inputNum,
+              pcGridsNumberShow: pcGridsNumberShow,
+              gridsNumberShow: gridsNumberShow);
+        }
+        if (you[i] == selectNum.value) {
+          you[i] = 0;
+          winner = lineCheckHelper.check(
+              numList: gridsNumHelper.toTwoDimensionalArrays(you),
+              name: '玩家',
+              btnBgColor: btnBgColor,
+              girdsState: girdsState,
+              history: history,
+              inputNum: inputNum,
+              pcGridsNumberShow: pcGridsNumberShow,
+              gridsNumberShow: gridsNumberShow);
+        }
       }
-      if (you[i] == selectNum.value) {
-        you[i] = 0;
-        winner = lineCheckHelper.check(
-            numList: gridsNumHelper.toTwoDimensionalArrays(you),
-            name: '玩家',
-            controller: controller,
-            btnBgColor: btnBgColor);
-      }
+      //檢查完後更新firebase
+      fireBaseProvider.update(gameId: gameId.string, data: {
+        "history": history,
+        "selectNum": selectNum.value,
+        "winner": winner,
+      });
+      debugPrint('selectNum:$selectNum');
+      debugPrint('pc:$pc');
+      debugPrint('you:$you');
     }
-    //檢查完後更新firebase
-    fireBaseProvider.update(gameId: gameId.string, data: {
-      "history": history,
-      "selectNum": selectNum.value,
-      "winner": winner,
-    });
-    debugPrint('selectNum:$selectNum');
-    debugPrint('pc:$pc');
-    debugPrint('you:$you');
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }
 

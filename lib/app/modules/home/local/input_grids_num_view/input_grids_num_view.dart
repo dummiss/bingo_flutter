@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../modules/home/local/one_player/one_player_controller.dart';
-import 'button.dart';
-import 'input_grids.dart';
+import '../one_player/one_player_controller.dart';
+import '../../../../widget/button.dart';
+import '../../../../widget/input_grids.dart';
 
 class InputGridsNumView extends StatefulWidget {
   final String description;
-  final Function() renderBtnFn, nextBtnFn;
+  final Function()renderBtnFn, nextBtnFn;
   final RxBool newGame;
-  final controller;
   final Color bntBgColor;
+  final RxString errorMS;
+  final RxList gridsNumberShow;
+  final RxBool girdsState;
+  final Function inputNum;
 
   const InputGridsNumView({
     Key? key,
@@ -18,8 +21,11 @@ class InputGridsNumView extends StatefulWidget {
     required this.renderBtnFn,
     required this.nextBtnFn,
     required this.newGame,
-    required this.controller,
     required this.bntBgColor,
+    required this.errorMS,
+    required this.gridsNumberShow,
+    required this.girdsState,
+    required this.inputNum,
   }) : super(key: key);
 
   @override
@@ -40,11 +46,15 @@ class _InputGridsNumViewState extends State<InputGridsNumView> {
         const SizedBox(
           height: 40,
         ),
-        Obx(() => Text(widget.controller.errorMS.value,style: const TextStyle(color: Colors.red),)),
+        Obx(() => Text(
+              widget.errorMS.value,
+              style: const TextStyle(color: Colors.red),
+            )),
         InputGrids(
-            controller: widget.controller,
-            newGame: widget.controller.girdsState,
-            gridsNumber: widget.controller.gridsNumberShow),
+          newGame: widget.girdsState,
+          gridsNumber: widget.gridsNumberShow,
+          inputNum: widget.inputNum,
+        ),
         const SizedBox(
           height: 40,
         ),

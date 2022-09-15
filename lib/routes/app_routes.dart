@@ -1,4 +1,4 @@
-part of 'app_pages.dart';
+part of '../../routes/app_pages.dart';
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
 abstract class Routes {
@@ -16,3 +16,6 @@ abstract class _Paths {
   static const TWO_PLAYER = '/two-player';
   static const ONLINE = '/online';
 }
+
+//TODO：路由
+//static const ONLINE = '/online/join-game'

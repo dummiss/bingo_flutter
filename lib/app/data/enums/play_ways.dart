@@ -1,0 +1,4 @@
+enum PlayWays {
+  own,
+  pc,
+}

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'choice_by_own_view.dart';
+
 
 class StartView extends StatefulWidget {
   final Color btnBgColor;
-  final controller;
   final routeName; // Todo:Ask: 這個是放路由class，要怎麼定義型別？
 
-  const StartView({Key? key, required this.controller, required this.btnBgColor, required this.routeName}) : super(key: key);
+  const StartView({Key? key, required this.btnBgColor, required this.routeName})
+      : super(key: key);
 
   @override
   State<StartView> createState() => _StartViewState();

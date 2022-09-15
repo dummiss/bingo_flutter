@@ -4,17 +4,22 @@ import 'package:bingo_flutter/app/widget/input_grids.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'choice_by_pc.dart';
-
 class ChoiceByOwnView extends StatefulWidget {
   final RxList gridsNumberShow;
   final Color btnBgColor;
-  final controller;
+  final RxBool girdsState;
+  final RxList history;
+  final Function inputNum;
+  final Function gameStartNextBtnFn;
+
   const ChoiceByOwnView(
       {Key? key,
       required this.btnBgColor,
-      required this.controller,
-      required this.gridsNumberShow})
+      required this.gridsNumberShow,
+      required this.girdsState,
+      required this.history,
+      required this.inputNum,
+      required this.gameStartNextBtnFn})
       : super(key: key);
 
   @override
@@ -59,10 +64,10 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
                     height: 45,
                     btnText: 'next',
                     fn: () {
-                      widget.controller.gameStartNextBtnFn(
-                          numberController.text, widget.controller,widget.btnBgColor);
+                      widget.gameStartNextBtnFn(
+                          numberController.text, widget.btnBgColor);
                       numberController.clear();
-                      //TODO:這裡不知道如何讓他自己可重畫，只好下setState
+                      //TODO:把history改成Rx還是無法自己更新
                       setState(() {});
                     },
                     bgColor: widget.btnBgColor,
@@ -72,9 +77,10 @@ class _ChoiceByOwnViewState extends State<ChoiceByOwnView> {
                 ),
                 InputGrids(
                     gameStart: true,
-                    newGame: widget.controller.girdsState,
+                    newGame: widget.girdsState,
                     gridsNumber: widget.gridsNumberShow,
-                    history: widget.controller.history),
+                    history: widget.history,
+                    inputNum: widget.inputNum),
               ],
             ),
           ),

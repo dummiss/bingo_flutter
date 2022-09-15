@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../routes/app_pages.dart';
+import '../../routes/app_pages.dart';
 import 'button.dart';
 import 'input_grids.dart';
 
 class ResultView extends StatefulWidget {
-  final controller;
   final Color btnBgColor;
   final String result;
+  final RxList gridsNumberShow;
+  final RxList pcGridsNumberShow;
+  final RxBool girdsState;
+  final RxList history;
+  final Function inputNum;
 
   const ResultView(
       {Key? key,
-      required this.controller,
       required this.btnBgColor,
-      this.result = ''})
+      this.result = '',
+      required this.gridsNumberShow,
+      required this.pcGridsNumberShow,
+      required this.girdsState,
+      required this.history,
+      required this.inputNum})
       : super(key: key);
 
   @override
@@ -29,7 +37,8 @@ class _ResultViewState extends State<ResultView> {
           title: const Text('單機對戰中'),
         ),
         body: Center(
-          child: SingleChildScrollView( //防止邊界溢出
+          child: SingleChildScrollView(
+            //防止邊界溢出
             child: Column(
               children: [
                 const Text(
@@ -37,10 +46,12 @@ class _ResultViewState extends State<ResultView> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
                 InputGrids(
-                    gameStart: true,
-                    newGame: widget.controller.girdsState,
-                    gridsNumber: widget.controller.pcGridsNumberShow,
-                history: widget.controller.history,),
+                  gameStart: true,
+                  newGame: widget.girdsState,
+                  gridsNumber: widget.pcGridsNumberShow,
+                  history: widget.history,
+                  inputNum: widget.inputNum,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -60,7 +71,6 @@ class _ResultViewState extends State<ResultView> {
                     ],
                   ),
                 ),
-
                 const SizedBox(
                   height: 15,
                 ),
@@ -68,7 +78,7 @@ class _ResultViewState extends State<ResultView> {
                     width: 140,
                     height: 45,
                     btnText: '回主畫面',
-                    fn: ()=>Get.toNamed(Routes.HOME),
+                    fn: () => Get.offAllNamed(Routes.HOME),
                     bgColor: widget.btnBgColor,
                     textSize: 20),
                 const SizedBox(
@@ -79,10 +89,12 @@ class _ResultViewState extends State<ResultView> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
                 InputGrids(
-                    gameStart: true,
-                    newGame: widget.controller.girdsState,
-                    gridsNumber: widget.controller.gridsNumberShow,
-                    history: widget.controller.history),
+                  gameStart: true,
+                  newGame: widget.girdsState,
+                  gridsNumber: widget.gridsNumberShow,
+                  history: widget.history,
+                  inputNum: widget.inputNum,
+                ),
               ],
             ),
           ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../app/widget/choice_by_pc.dart';
 import '../../../app/widget/result_view.dart';
 
 class LineCheckHelper {
@@ -9,11 +7,16 @@ class LineCheckHelper {
   int s = 0;
   int k = 0;
 
-  check(
-      {required List numList,
-      required String name,
-      required Color btnBgColor,
-      required controller}) {
+  check({
+    required List numList,
+    required String name,
+    required Color btnBgColor,
+    required RxList pcGridsNumberShow,
+    required RxList gridsNumberShow,
+    required RxBool girdsState,
+    required RxList history,
+    required Function inputNum,
+  }) {
     s = 0;
     k = 0;
     //橫
@@ -52,8 +55,12 @@ class LineCheckHelper {
       debugPrint("連線數=$k,BINGO!\n");
       Get.off(() => ResultView(
             btnBgColor: btnBgColor,
-            controller: controller,
-          result :'$name 贏了',
+            result: '$name 贏了',
+            inputNum: inputNum,
+            pcGridsNumberShow: pcGridsNumberShow,
+            gridsNumberShow: gridsNumberShow,
+            girdsState: girdsState,
+            history: history,
           ));
 
       return name;

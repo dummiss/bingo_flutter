@@ -4,28 +4,41 @@ part 'game_data_model.g.dart';
 
 @JsonSerializable()
 class GameDataModel {
-  Map<String, List<int>>? data;
   @JsonKey(defaultValue: [])
-  List<int> history;
-  @JsonKey(defaultValue: '')
-  String howToPlay;
+  List<Map<String,dynamic>> data;
+  // @JsonKey(defaultValue: [])
+  List<int>? history;
+  // @JsonKey(defaultValue: '')
+  String? howToPlay;
   @JsonKey(defaultValue: [])
   List<String> player;
-  @JsonKey(defaultValue: -1)
-  int selectNum;
-  @JsonKey(defaultValue: [])
-  List<String> sequence;
-  @JsonKey(defaultValue: '')
-  String winner;
+  // @JsonKey(defaultValue: -1)
+  int? selectNum;
+  // @JsonKey(defaultValue: [])
+  List<String>? sequence;
+  // @JsonKey(defaultValue: '')
+  String? winner;
+  // @JsonKey(defaultValue: -1)
+  int? autoSelect;
+  // @JsonKey(defaultValue: -1)
+  int? ownSelect;
+  // @JsonKey(defaultValue: false)
+  bool? isStarted;
+  // @JsonKey(defaultValue: false)
+  bool? isEnded;
 
   GameDataModel(
-      {this.data,
-      required this.history,
-      required this.howToPlay,
+      {required this.data,
+      this.history,
+      this.howToPlay,
       required this.player,
-      required this.selectNum,
-      required this.sequence,
-      required this.winner});
+      this.selectNum,
+      this.sequence,
+      this.winner,
+      this.autoSelect,
+      this.ownSelect,
+      this.isStarted,
+      this.isEnded});
 
   factory GameDataModel.fromJson(Map<String, dynamic> json) =>
       _$GameDataModelFromJson(json);

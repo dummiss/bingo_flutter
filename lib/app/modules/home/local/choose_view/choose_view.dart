@@ -4,14 +4,32 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'choice_by_own_view.dart';
-import 'choice_by_pc.dart';
+import '../../../../widget/choice_by_own_view.dart';
+import '../../../../widget/choice_by_pc_view.dart';
 
 class ChooseView extends StatefulWidget {
   final Color btnBgColor;
-  final controller;
+  final RxList gridsNumberShow;
+  final RxList pcGridsNumberShow;
+  final RxBool girdsState;
+  final RxList history;
+  final Function inputNum;
+  final RxInt selectNum;
+  final Function selectNumByRandom;
+  final Function gameStartNextBtnFn;
+  final Function createGame;
   const ChooseView(
-      {Key? key, required this.btnBgColor, required this.controller})
+      {Key? key,
+      required this.btnBgColor,
+      required this.gridsNumberShow,
+      required this.pcGridsNumberShow,
+      required this.girdsState,
+      required this.history,
+      required this.inputNum,
+      required this.selectNum,
+      required this.selectNumByRandom,
+      required this.gameStartNextBtnFn,
+      required this.createGame})
       : super(key: key);
 
   @override
@@ -45,14 +63,18 @@ class _ChooseViewState extends State<ChooseView> {
                   btnText: '自選號碼',
                   fn: () {
                     Get.to(() => StartView(
-                          controller: widget.controller,
                           btnBgColor: widget.btnBgColor,
                           routeName: ChoiceByOwnView(
-                              btnBgColor: widget.btnBgColor,
-                              controller: widget.controller, gridsNumberShow: widget.controller.gridsNumberShow,),
+                            btnBgColor: widget.btnBgColor,
+                            gridsNumberShow: widget.gridsNumberShow,
+                            gameStartNextBtnFn: widget.gameStartNextBtnFn,
+                            girdsState: widget.girdsState,
+                            inputNum: widget.inputNum,
+                            history: widget.history,
+                          ),
                         ));
-                    widget.controller.createGame('自選號碼');
-                    print('${widget.controller.gridsNumberShow}');
+                    widget.createGame('自選號碼');
+                    print('${widget.gridsNumberShow}');
                   },
                   bgColor: Colors.orangeAccent),
               const SizedBox(
@@ -65,13 +87,20 @@ class _ChooseViewState extends State<ChooseView> {
                   btnText: '電腦叫號',
                   fn: () {
                     Get.to(() => StartView(
-                          controller: widget.controller,
                           btnBgColor: widget.btnBgColor,
                           routeName: ChoiceByPc(
-                              btnBgColor: widget.btnBgColor,
-                              controller: widget.controller),
+                            btnBgColor: widget.btnBgColor,
+                            girdsState: widget.girdsState,
+                            gridsNumberShow: widget.gridsNumberShow,
+                            selectNum: widget.selectNum,
+                            pcGridsNumberShow: widget.pcGridsNumberShow,
+                            inputNum: widget.inputNum,
+                            selectNumByRandom: widget.selectNumByRandom,
+                            history: widget.history,
+                            gameStartNextBtnFn: widget.gameStartNextBtnFn,
+                          ),
                         ));
-                    widget.controller.createGame('電腦叫號');
+                    widget.createGame('電腦叫號');
                   },
                   bgColor: Colors.orangeAccent),
             ],

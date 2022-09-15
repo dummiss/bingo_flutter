@@ -8,24 +8,26 @@ part of 'game_data_model.dart';
 
 GameDataModel _$GameDataModelFromJson(Map<String, dynamic> json) =>
     GameDataModel(
-      data: (json['data'] as Map<String, dynamic>?)?.map(
-        (k, e) =>
-            MapEntry(k, (e as List<dynamic>).map((e) => e as int).toList()),
-      ),
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          [],
       history:
-          (json['history'] as List<dynamic>?)?.map((e) => e as int).toList() ??
-              [],
-      howToPlay: json['howToPlay'] as String? ?? '',
+          (json['history'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      howToPlay: json['howToPlay'] as String?,
       player: (json['player'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      selectNum: json['selectNum'] as int? ?? -1,
+      selectNum: json['selectNum'] as int?,
       sequence: (json['sequence'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      winner: json['winner'] as String? ?? '',
+          ?.map((e) => e as String)
+          .toList(),
+      winner: json['winner'] as String?,
+      autoSelect: json['autoSelect'] as int?,
+      ownSelect: json['ownSelect'] as int?,
+      isStarted: json['isStarted'] as bool?,
+      isEnded: json['isEnded'] as bool?,
     );
 
 Map<String, dynamic> _$GameDataModelToJson(GameDataModel instance) =>
@@ -37,4 +39,8 @@ Map<String, dynamic> _$GameDataModelToJson(GameDataModel instance) =>
       'selectNum': instance.selectNum,
       'sequence': instance.sequence,
       'winner': instance.winner,
+      'autoSelect': instance.autoSelect,
+      'ownSelect': instance.ownSelect,
+      'isStarted': instance.isStarted,
+      'isEnded': instance.isEnded,
     };
